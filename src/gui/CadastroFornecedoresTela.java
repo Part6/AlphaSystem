@@ -4,6 +4,10 @@
  */
 package gui;
 
+import javax.swing.JOptionPane;
+import persistencia.Fornecedor;
+import dao.fornecedordao;
+
 /**
  *
  * @author Desktop
@@ -45,6 +49,11 @@ public class CadastroFornecedoresTela extends javax.swing.JFrame {
         });
 
         salvar.setText("Salvar");
+        salvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salvarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel1.setText("CADASTRO DE FORNECEDORES");
@@ -122,6 +131,23 @@ public class CadastroFornecedoresTela extends javax.swing.JFrame {
         nome.setText("...");
         localizacao.setText("...");
     }//GEN-LAST:event_limparActionPerformed
+
+    private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
+        Fornecedor p = new Fornecedor();
+        p.setNome(nome.getText());  
+                        p.setNome(nome.getText());
+                        p.setLocal(localizacao.getText());
+        
+        fornecedordao fdao = new fornecedordao();
+        try{
+            fdao.inserir(p);
+            limparActionPerformed(evt);
+            JOptionPane.showMessageDialog(null,"Cadastro realizado!"); 
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null,"Falha no Cadastro. Tente novamente!"); 
+        }
+    }//GEN-LAST:event_salvarActionPerformed
 
     /**
      * @param args the command line arguments

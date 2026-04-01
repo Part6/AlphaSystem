@@ -13,7 +13,7 @@ public class Cliente {
     private String nome;
     private String cpf;
     private String email;
-    private Endereco endereco;
+    private int enderecoId;
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
@@ -27,6 +27,6 @@ public class Cliente {
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    public Endereco getEndereco() { return endereco; }
-    public void setEndereco(Endereco endereco) { this.endereco = endereco; }
+    public int getEnderecoId() { return enderecoId; }
+    public void setEnderecoId(int endereco) { this.enderecoId = endereco; }
 }

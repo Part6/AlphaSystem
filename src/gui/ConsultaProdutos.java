@@ -4,6 +4,10 @@
  */
 package gui;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import dao.produtodao;
+import persistencia.Produto;
 /**
  *
  * @author Desktop
@@ -15,6 +19,7 @@ public class ConsultaProdutos extends javax.swing.JFrame {
      */
     public ConsultaProdutos() {
         initComponents();
+        listarProdutos();
     }
 
     /**
@@ -140,4 +145,29 @@ public class ConsultaProdutos extends javax.swing.JFrame {
     private javax.swing.JButton salvar;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
+
+private void listarProdutos(){
+        try {
+            produtodao produtosdao = new produtodao();
+            
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            model.setNumRows(0);
+            
+            ArrayList<Produto> listagem = produtosdao.getAll();
+            
+            for(int i = 0; i < listagem.size(); i++){
+                model.addRow(new Object[]{
+                    listagem.get(i).getId(),
+                    listagem.get(i).getNome(),
+                    listagem.get(i).getCategoria(),
+                    listagem.get(i).getObservacoes(),
+                    listagem.get(i).getQuantidade(),
+                    listagem.get(i).getPreco(),
+                });
+            }
+        } catch (Exception e) {
+        }
+    
+    }
+
 }

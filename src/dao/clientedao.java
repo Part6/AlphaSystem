@@ -14,7 +14,7 @@ import persistencia.Cliente;
  */
 public class clientedao {
 public void inserir(Cliente cliente) {
-        String sql = "Insert into Cliente(Nome,Categoria,Observacoes,Quantidade,Preco) VALUES (?, ?, ?, ?)";
+        String sql = "Insert into Cliente(Nome, Cpf, Email, EnderecoID) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = coneccao.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -22,7 +22,7 @@ public void inserir(Cliente cliente) {
             stmt.setString(1, cliente.getNome());
             stmt.setString(2, cliente.getCpf());
             stmt.setString(3, cliente.getEmail());
-            stmt.setInt(4, cliente.getEndereco().getId());
+            stmt.setInt(4, cliente.getEnderecoId());
 
             stmt.executeUpdate();
 
@@ -30,4 +30,27 @@ public void inserir(Cliente cliente) {
             e.printStackTrace();
         } 
    }
+
+public Cliente search(String nome){
+    String sql = "Select from Cliente where Nome = ? ";
+          try (Connection conn = coneccao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+              
+              stmt.setString(1, nome);
+              ResultSet rs = stmt.executeQuery();
+              
+              Cliente c = new Cliente();
+              c.setId(rs.getInt("Id"));
+              c.setNome(rs.getString("Nome"));
+              c.setCpf(rs.getString("CPF"));
+              c.setEmail(rs.getString("Email"));
+              
+              c.setEnderecoId(rs.getInt("EnderecoID"));
+              return c;
+          
+          } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } 
+}
 }

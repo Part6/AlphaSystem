@@ -21,7 +21,7 @@ public class vendadao {
 
             stmt.setInt(1, v.getCliente().getId());
             stmt.setString(2, v.getObservacoes());
-            stmt.setDate(3, v.getData());
+            stmt.setDate(3, java.sql.Date.valueOf(v.getData()));
 
 
             stmt.executeUpdate();

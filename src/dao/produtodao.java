@@ -11,7 +11,7 @@ import persistencia.Produto;
 
 public class produtodao {
    public void inserir(Produto p) {
-        String sql = "Insert into Produtos(Nome,Categoria,Observacoes,Quantidade,Preco) VALUES (?, ?, ?, ?)";
+        String sql = "Insert into Produtos(Nome,Categoria,Observacoes,Quantidade,Preco) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = coneccao.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -29,7 +29,7 @@ public class produtodao {
         } 
    }
    
-  public List<Produto> getAll(){
+  public ArrayList<Produto> getAll(){
              String sql = "SELECT * FROM Produtos";  
              //LIKE nos permite pesquisar por partes de um nome, ao invés de pesquisarmos por todo nome
              
@@ -40,7 +40,7 @@ public class produtodao {
                     
                     ResultSet rs = stmt.executeQuery();   
                     
-                    List<Produto> listaEmpresas = new ArrayList<>();
+                    ArrayList<Produto> listaEmpresas = new ArrayList<>();
                     while (rs.next()) {
                          Produto p = new Produto();
                         

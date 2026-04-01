@@ -4,6 +4,9 @@
  */
 package gui;
 
+import javax.swing.JOptionPane;
+import persistencia.Produto;
+import dao.produtodao;
 /**
  *
  * @author Desktop
@@ -63,6 +66,11 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
         jLabel5.setText("Preço:");
 
         salvar.setText("Salvar");
+        salvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salvarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel1.setText("CADASTRO DE PRODUTOS");
@@ -174,6 +182,26 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
        preco.setText("...");
        qnt.setText("...");
     }//GEN-LAST:event_limparActionPerformed
+
+    private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
+       Produto p = new Produto();
+        p.setNome(nome.getText());  
+                        p.setNome(nome.getText());
+                        p.setCategoria(categoria.getText());
+                        p.setObservacoes(descricao.getText());
+                        p.setQuantidade(Integer.parseInt(qnt.getText()));
+                        p.setPreco(Double.parseDouble(preco.getText()));
+        
+        produtodao produtodao = new produtodao();
+        try{
+            produtodao.inserir(p);
+            limparActionPerformed(evt);
+            JOptionPane.showMessageDialog(null,"Cadastro realizado!"); 
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null,"Falha no Cadastro. Tente novamente!"); 
+        }
+    }//GEN-LAST:event_salvarActionPerformed
 
     /**
      * @param args the command line arguments
