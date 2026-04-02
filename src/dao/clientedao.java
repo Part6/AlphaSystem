@@ -25,10 +25,9 @@ public void inserir(Cliente cliente) {
             stmt.setInt(4, cliente.getEnderecoId());
 
             stmt.executeUpdate();
-            System.out.println("cadastrado cliente");
 
         } catch (Exception e) {
-            System.out.println("Erro ao inserir: " + e.getMessage());
+            e.printStackTrace();
         } 
    }
 
@@ -41,7 +40,7 @@ public Cliente search(String nome) {
         stmt.setString(1, nome);
         ResultSet rs = stmt.executeQuery();
 
-        if (rs.next()) { 
+        if (rs.next()) { // 🔥 ESSENCIAL
             Cliente c = new Cliente();
             c.setId(rs.getInt("Id"));
             c.setNome(rs.getString("Nome"));
@@ -53,7 +52,7 @@ public Cliente search(String nome) {
         }
 
     } catch (Exception e) {
-        System.out.println("Erro ao procurar id cliente: " + e.getMessage());
+        e.printStackTrace();
     }
 
     return null;

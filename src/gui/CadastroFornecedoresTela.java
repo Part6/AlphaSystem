@@ -38,11 +38,6 @@ public class CadastroFornecedoresTela extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         localizacao = new javax.swing.JTextField();
         sair = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        salvarMenu = new javax.swing.JMenuItem();
-        limparMenu = new javax.swing.JMenuItem();
-        sairMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -66,12 +61,12 @@ public class CadastroFornecedoresTela extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setText("Nome:");
 
-        nome.setNextFocusableComponent(localizacao);
+        nome.setText("...");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel3.setText("Localização:");
 
-        localizacao.setNextFocusableComponent(nome);
+        localizacao.setText("...");
 
         sair.setText("Sair");
         sair.addActionListener(new java.awt.event.ActionListener() {
@@ -79,39 +74,6 @@ public class CadastroFornecedoresTela extends javax.swing.JFrame {
                 sairActionPerformed(evt);
             }
         });
-
-        jMenu1.setText("File");
-
-        salvarMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        salvarMenu.setText("Entrar");
-        salvarMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salvarMenuActionPerformed(evt);
-            }
-        });
-        jMenu1.add(salvarMenu);
-
-        limparMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        limparMenu.setText("Limpar");
-        limparMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                limparMenuActionPerformed(evt);
-            }
-        });
-        jMenu1.add(limparMenu);
-
-        sairMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        sairMenu.setText("Sair");
-        sairMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sairMenuActionPerformed(evt);
-            }
-        });
-        jMenu1.add(sairMenu);
-
-        jMenuBar1.add(jMenu1);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,7 +117,7 @@ public class CadastroFornecedoresTela extends javax.swing.JFrame {
                     .addComponent(limpar)
                     .addComponent(salvar)
                     .addComponent(sair))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -166,9 +128,8 @@ public class CadastroFornecedoresTela extends javax.swing.JFrame {
     }//GEN-LAST:event_sairActionPerformed
 
     private void limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparActionPerformed
-        nome.setText("");
-        localizacao.setText("");
-        
+        nome.setText("...");
+        localizacao.setText("...");
     }//GEN-LAST:event_limparActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
@@ -187,18 +148,6 @@ public class CadastroFornecedoresTela extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Falha no Cadastro. Tente novamente!"); 
         }
     }//GEN-LAST:event_salvarActionPerformed
-
-    private void salvarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarMenuActionPerformed
-        salvarActionPerformed(evt);
-    }//GEN-LAST:event_salvarMenuActionPerformed
-
-    private void sairMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairMenuActionPerformed
-       dispose();
-    }//GEN-LAST:event_sairMenuActionPerformed
-
-    private void limparMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparMenuActionPerformed
-        limparActionPerformed(evt);
-    }//GEN-LAST:event_limparMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,15 +188,10 @@ public class CadastroFornecedoresTela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JButton limpar;
-    private javax.swing.JMenuItem limparMenu;
     private javax.swing.JTextField localizacao;
     private javax.swing.JTextField nome;
     private javax.swing.JButton sair;
-    private javax.swing.JMenuItem sairMenu;
     private javax.swing.JButton salvar;
-    private javax.swing.JMenuItem salvarMenu;
     // End of variables declaration//GEN-END:variables
 }

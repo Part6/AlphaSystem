@@ -23,7 +23,7 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
      */
     public CadastroDeProdutoTela() {
         initComponents();
-        preencheComboBox();
+        carregarFornecedores();
     }
 
     /**
@@ -50,23 +50,18 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         descricao = new javax.swing.JTextField();
+        fornecedor = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         taxa = new javax.swing.JTextField();
-        combobox = new javax.swing.JComboBox<>();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        salvarMenu = new javax.swing.JMenuItem();
-        limparMenu = new javax.swing.JMenuItem();
-        sairMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel4.setText("Quantidade:");
 
-        preco.setNextFocusableComponent(descricao);
+        preco.setText("...");
 
-        qnt.setNextFocusableComponent(preco);
+        qnt.setText("...");
 
         limpar.setText("Limpar");
         limpar.addActionListener(new java.awt.event.ActionListener() {
@@ -91,12 +86,12 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setText("Nome:");
 
-        nome.setNextFocusableComponent(categoria);
+        nome.setText("...");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel3.setText("Categoria:");
 
-        categoria.setNextFocusableComponent(qnt);
+        categoria.setText("...");
 
         sair.setText("Sair");
         sair.addActionListener(new java.awt.event.ActionListener() {
@@ -111,49 +106,12 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel8.setText("Fornecedor:");
 
+        descricao.setText("...");
+
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel7.setText("Taxa:");
 
-        taxa.setNextFocusableComponent(nome);
-
-        combobox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboboxActionPerformed(evt);
-            }
-        });
-
-        jMenu1.setText("File");
-
-        salvarMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        salvarMenu.setText("Entrar");
-        salvarMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salvarMenuActionPerformed(evt);
-            }
-        });
-        jMenu1.add(salvarMenu);
-
-        limparMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        limparMenu.setText("Limpar");
-        limparMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                limparMenuActionPerformed(evt);
-            }
-        });
-        jMenu1.add(limparMenu);
-
-        sairMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        sairMenu.setText("Sair");
-        sairMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sairMenuActionPerformed(evt);
-            }
-        });
-        jMenu1.add(sairMenu);
-
-        jMenuBar1.add(jMenu1);
-
-        setJMenuBar(jMenuBar1);
+        taxa.setText("...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -187,7 +145,7 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addComponent(categoria, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                         .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                        .addComponent(combobox, 0, 258, Short.MAX_VALUE)))
+                        .addComponent(fornecedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -217,13 +175,13 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
                 .addComponent(descricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
-                .addGap(12, 12, 12)
-                .addComponent(combobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(fornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(taxa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(limpar)
                     .addComponent(salvar)
@@ -239,12 +197,11 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
     }//GEN-LAST:event_sairActionPerformed
 
     private void limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparActionPerformed
-       nome.setText("");
-       categoria.setText("");
-       descricao.setText("");
-       preco.setText("");
-       qnt.setText("");
-       taxa.setText("");
+       nome.setText("...");
+       categoria.setText("...");
+       descricao.setText("...");
+       preco.setText("...");
+       qnt.setText("...");
     }//GEN-LAST:event_limparActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
@@ -254,45 +211,31 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
                         p.setCategoria(categoria.getText());
                         p.setObservacoes(descricao.getText());
                         p.setQuantidade(Integer.parseInt(qnt.getText()));
-                        p.setPreco(Float.parseFloat(preco.getText()));
+                        p.setPreco(Double.parseDouble(preco.getText()));
         
         produtodao produtodao = new produtodao();
         try{
-            int idProduto = produtodao.inserir(p);
+            produtodao.inserir(p);
             
             
             FornecedorProdutoDao fdao = new FornecedorProdutoDao();
             
-            int idfornecedor = ((Fornecedor)combobox.getSelectedItem()).getId();
-            fdao.inserir(idfornecedor,idProduto,Float.parseFloat(taxa.getText()));
+            int idfornecedor = ((Fornecedor)fornecedor.getSelectedItem()).getId();
+            fdao.inserir(idfornecedor,produtodao.searchId(nome.getText(),
+                    categoria.getText(),
+                    descricao.getText(),
+                    Integer.parseInt(qnt.getText()),
+                    Double.parseDouble(preco.getText())),Float.parseFloat(taxa.getText()));
             
            
             
             limparActionPerformed(evt);
             JOptionPane.showMessageDialog(null,"Cadastro realizado!"); 
-            
         }
         catch (Exception e){
-            JOptionPane.showMessageDialog(null,"Falha no Cadastro" + e.getMessage() + "Tente novamente!"); 
-            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null,"Falha no Cadastro. Tente novamente!"); 
         }
     }//GEN-LAST:event_salvarActionPerformed
-
-    private void salvarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarMenuActionPerformed
-       salvarActionPerformed(evt);
-    }//GEN-LAST:event_salvarMenuActionPerformed
-
-    private void sairMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairMenuActionPerformed
-        dispose();
-    }//GEN-LAST:event_sairMenuActionPerformed
-
-    private void limparMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparMenuActionPerformed
-       limparActionPerformed(evt);
-    }//GEN-LAST:event_limparMenuActionPerformed
-
-    private void comboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboboxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -331,8 +274,8 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField categoria;
-    private javax.swing.JComboBox<Fornecedor> combobox;
     private javax.swing.JTextField descricao;
+    private javax.swing.JComboBox<String> fornecedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -341,27 +284,24 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JButton limpar;
-    private javax.swing.JMenuItem limparMenu;
     private javax.swing.JTextField nome;
     private javax.swing.JTextField preco;
     private javax.swing.JTextField qnt;
     private javax.swing.JButton sair;
-    private javax.swing.JMenuItem sairMenu;
     private javax.swing.JButton salvar;
-    private javax.swing.JMenuItem salvarMenu;
     private javax.swing.JTextField taxa;
     // End of variables declaration//GEN-END:variables
 
-private void preencheComboBox(){
-      fornecedordao contaDao = new fornecedordao();
-      List<Fornecedor> flist = contaDao.listar();
-      
-      for(Fornecedor f : flist){
-          combobox.addItem(f);
-      }
-    }    
+public void carregarFornecedores() {
+    fornecedordao dao = new fornecedordao();
+    List<Fornecedor> lista = dao.listar();
+
+    fornecedor.removeAllItems();
+
+    for (Fornecedor f : lista) {
+        fornecedor.addItem(f.toString());
+    }
+}
 
 }

@@ -40,18 +40,14 @@ public class ProdutoHasVendaDao {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
               
               stmt.setInt(1, idv);
-              
               ResultSet rs = stmt.executeQuery();
 
-                if (rs.next()) {
-                    return rs.getInt("IdProduto");
-                }
+              return rs.getInt("IdProduto");
           
           } catch (Exception e) {
             e.printStackTrace();
-            
+            return -1;
         } 
-              return -1;
         } 
     
     public int getVendaId(int idp){
@@ -62,15 +58,13 @@ public class ProdutoHasVendaDao {
               
               stmt.setInt(1, idp);
               ResultSet rs = stmt.executeQuery();
-                if (rs.next()) {
+
               return rs.getInt("IdVenda");
-                }
           
           } catch (Exception e) {
             e.printStackTrace();
-           
+            return -1;
         } 
-              return -1;
         } 
     
     

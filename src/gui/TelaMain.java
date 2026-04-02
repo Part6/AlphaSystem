@@ -4,10 +4,6 @@
  */
 package gui;
 
-import java.awt.Component;
-import javax.swing.FocusManager;
-import javax.swing.JButton;
-
 /**
  *
  * @author Desktop
@@ -40,14 +36,10 @@ public class TelaMain extends javax.swing.JFrame {
         consultaproduto = new javax.swing.JButton();
         consultavenda = new javax.swing.JButton();
         RegistoVenda = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        sairMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         clientecadastro.setText("CADASTRAR CLIENTE");
-        clientecadastro.setNextFocusableComponent(cadastroproduto);
         clientecadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clientecadastroActionPerformed(evt);
@@ -65,7 +57,6 @@ public class TelaMain extends javax.swing.JFrame {
         });
 
         cadastrofornecedor.setText("CADASTRAR FORNECEDOR");
-        cadastrofornecedor.setNextFocusableComponent(RegistoVenda);
         cadastrofornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cadastrofornecedorActionPerformed(evt);
@@ -73,7 +64,6 @@ public class TelaMain extends javax.swing.JFrame {
         });
 
         cadastroproduto.setText("CADASTRAR PRODUTO");
-        cadastroproduto.setNextFocusableComponent(cadastrofornecedor);
         cadastroproduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cadastroprodutoActionPerformed(evt);
@@ -81,7 +71,6 @@ public class TelaMain extends javax.swing.JFrame {
         });
 
         consultaproduto.setText("CONSULTAR PRODUTOS");
-        consultaproduto.setNextFocusableComponent(consultavenda);
         consultaproduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 consultaprodutoActionPerformed(evt);
@@ -89,7 +78,6 @@ public class TelaMain extends javax.swing.JFrame {
         });
 
         consultavenda.setText("CONSULTAR VENDAS");
-        consultavenda.setNextFocusableComponent(clientecadastro);
         consultavenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 consultavendaActionPerformed(evt);
@@ -97,32 +85,11 @@ public class TelaMain extends javax.swing.JFrame {
         });
 
         RegistoVenda.setText("REGISTRAR VENDA");
-        RegistoVenda.setNextFocusableComponent(consultaproduto);
         RegistoVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RegistoVendaActionPerformed(evt);
             }
         });
-
-        jMenu1.setText("File");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
-            }
-        });
-
-        sairMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        sairMenu.setText("Sair");
-        sairMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sairMenuActionPerformed(evt);
-            }
-        });
-        jMenu1.add(sairMenu);
-
-        jMenuBar1.add(jMenu1);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,7 +130,7 @@ public class TelaMain extends javax.swing.JFrame {
                 .addComponent(consultaproduto)
                 .addGap(18, 18, 18)
                 .addComponent(consultavenda)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(sair)
                 .addContainerGap())
         );
@@ -216,19 +183,6 @@ public class TelaMain extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_RegistoVendaActionPerformed
 
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        Component focused = FocusManager.getCurrentManager().getFocusOwner();
-
-        // Check if it's a JButton and activate it
-        if (focused instanceof JButton) {
-            ((JButton) focused).doClick();
-        }
-    }//GEN-LAST:event_jMenu1ActionPerformed
-
-    private void sairMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairMenuActionPerformed
-        dispose();
-    }//GEN-LAST:event_sairMenuActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -272,9 +226,6 @@ public class TelaMain extends javax.swing.JFrame {
     private javax.swing.JButton consultaproduto;
     private javax.swing.JButton consultavenda;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JButton sair;
-    private javax.swing.JMenuItem sairMenu;
     // End of variables declaration//GEN-END:variables
 }

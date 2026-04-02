@@ -48,11 +48,10 @@ public Endereco search(int id){
               c.setEstado(rs.getString("Estado"));
               c.setNumero(rs.getInt("Numero"));
               c.setCep(rs.getInt("CEP"));
-              System.out.println("cadastrado endereço;");
               return c;
           
           } catch (Exception e) {
-            System.out.println("Erro ao inserir: " + e.getMessage());
+            e.printStackTrace();
             return null;
         } 
 }
@@ -68,13 +67,11 @@ public int searchId(String rua, String cidade, String estado, int n, int cep){
               stmt.setInt(4, n);
               stmt.setInt(5, cep);
               ResultSet rs = stmt.executeQuery();
-              rs.next();
-              int id = rs.getInt("Id");
-              System.out.println("id adquirido");
-              return id;
+               
+              return rs.getInt("Id");
           
           } catch (Exception e) {
-            System.out.println("Erro ao procurar: " + e.getMessage());
+            e.printStackTrace();
             return -1;
         } 
 }
