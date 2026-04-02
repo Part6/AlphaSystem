@@ -38,6 +38,10 @@ public class LoginTela extends javax.swing.JFrame {
         senha = new javax.swing.JTextField();
         limpar = new javax.swing.JButton();
         entrar = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        EntrarMenu = new javax.swing.JMenuItem();
+        limparMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,12 +51,12 @@ public class LoginTela extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setText("Login:");
 
-        login.setText("...");
+        login.setNextFocusableComponent(senha);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel3.setText("Senha:");
 
-        senha.setText("...");
+        senha.setNextFocusableComponent(login);
 
         limpar.setText("Limpar");
         limpar.addActionListener(new java.awt.event.ActionListener() {
@@ -67,6 +71,30 @@ public class LoginTela extends javax.swing.JFrame {
                 entrarActionPerformed(evt);
             }
         });
+
+        jMenu1.setText("File");
+
+        EntrarMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        EntrarMenu.setText("Entrar");
+        EntrarMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EntrarMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(EntrarMenu);
+
+        limparMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        limparMenu.setText("Limpar");
+        limparMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limparMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(limparMenu);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,7 +133,7 @@ public class LoginTela extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(limpar)
                     .addComponent(entrar))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -138,9 +166,17 @@ public class LoginTela extends javax.swing.JFrame {
     }//GEN-LAST:event_entrarActionPerformed
 
     private void limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparActionPerformed
-        login.setText("...");
-        senha.setText("...");
+        login.setText("");
+        senha.setText("");
     }//GEN-LAST:event_limparActionPerformed
+
+    private void EntrarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EntrarMenuActionPerformed
+         entrarActionPerformed(evt);
+    }//GEN-LAST:event_EntrarMenuActionPerformed
+
+    private void limparMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparMenuActionPerformed
+       limparActionPerformed(evt);
+    }//GEN-LAST:event_limparMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,11 +214,15 @@ public class LoginTela extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem EntrarMenu;
     private javax.swing.JButton entrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JButton limpar;
+    private javax.swing.JMenuItem limparMenu;
     private javax.swing.JTextField login;
     private javax.swing.JTextField senha;
     // End of variables declaration//GEN-END:variables

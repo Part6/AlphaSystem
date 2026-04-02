@@ -53,6 +53,11 @@ public class CadastroClientesTela extends javax.swing.JFrame {
         cep = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         ncasa = new javax.swing.JTextField();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        salvarMenu = new javax.swing.JMenuItem();
+        limparMenu = new javax.swing.JMenuItem();
+        sairMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -76,12 +81,12 @@ public class CadastroClientesTela extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setText("Nome:");
 
-        nome.setText("...");
+        nome.setNextFocusableComponent(email);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel3.setText("Email:");
 
-        email.setText("...");
+        email.setNextFocusableComponent(cpf);
 
         sair.setText("Sair");
         sair.addActionListener(new java.awt.event.ActionListener() {
@@ -90,12 +95,12 @@ public class CadastroClientesTela extends javax.swing.JFrame {
             }
         });
 
-        cpf.setText("...");
+        cpf.setNextFocusableComponent(cep);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setText("CPF:");
 
-        estado.setText("...");
+        estado.setNextFocusableComponent(ncasa);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel6.setText("CEP:");
@@ -103,22 +108,60 @@ public class CadastroClientesTela extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel7.setText("Rua:");
 
-        rua.setText("...");
+        rua.setNextFocusableComponent(cidade);
+        rua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ruaActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel8.setText("Cidade:");
 
-        cidade.setText("...");
+        cidade.setNextFocusableComponent(estado);
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel9.setText("Estado:");
 
-        cep.setText("...");
+        cep.setNextFocusableComponent(rua);
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel10.setText("Número da casa:");
 
-        ncasa.setText("...");
+        ncasa.setNextFocusableComponent(nome);
+
+        jMenu1.setText("File");
+
+        salvarMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        salvarMenu.setText("Entrar");
+        salvarMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salvarMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(salvarMenu);
+
+        limparMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        limparMenu.setText("Limpar");
+        limparMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limparMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(limparMenu);
+
+        sairMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        sairMenu.setText("Sair");
+        sairMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sairMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(sairMenu);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -199,7 +242,7 @@ public class CadastroClientesTela extends javax.swing.JFrame {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ncasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(limpar)
                     .addComponent(salvar)
@@ -215,15 +258,37 @@ public class CadastroClientesTela extends javax.swing.JFrame {
     }//GEN-LAST:event_sairActionPerformed
 
     private void limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparActionPerformed
-      nome.setText("...");
-      email.setText("...");
-      cpf.setText("...");
-      
+      nome.setText("");
+      email.setText("");
+      cpf.setText("");
+      cep.setText("");
+      rua.setText("");
+      cidade.setText("");
+      estado.setText("");
+      ncasa.setText("");
     }//GEN-LAST:event_limparActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-        
+       
+        cadastroEndereco(evt);
+        cadastroCliente(evt);
     }//GEN-LAST:event_salvarActionPerformed
+
+    private void salvarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarMenuActionPerformed
+       salvarActionPerformed(evt);
+    }//GEN-LAST:event_salvarMenuActionPerformed
+
+    private void sairMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairMenuActionPerformed
+       dispose();
+    }//GEN-LAST:event_sairMenuActionPerformed
+
+    private void ruaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ruaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ruaActionPerformed
+
+    private void limparMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparMenuActionPerformed
+       limparActionPerformed(evt);
+    }//GEN-LAST:event_limparMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,12 +340,17 @@ public class CadastroClientesTela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JButton limpar;
+    private javax.swing.JMenuItem limparMenu;
     private javax.swing.JTextField ncasa;
     private javax.swing.JTextField nome;
     private javax.swing.JTextField rua;
     private javax.swing.JButton sair;
+    private javax.swing.JMenuItem sairMenu;
     private javax.swing.JButton salvar;
+    private javax.swing.JMenuItem salvarMenu;
     // End of variables declaration//GEN-END:variables
 private void cadastroCliente(java.awt.event.ActionEvent evt){
     Cliente p = new Cliente();
@@ -297,7 +367,7 @@ private void cadastroCliente(java.awt.event.ActionEvent evt){
         try{
             clientedao.inserir(p);
             limparActionPerformed(evt);
-            JOptionPane.showMessageDialog(null,"Cadastro realizado!"); 
+            JOptionPane.showMessageDialog(null,"Cadastro do Cliente realizado!"); 
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(null,"Falha no Cadastro. Tente novamente!"); 
@@ -315,8 +385,8 @@ private void cadastroEndereco(java.awt.event.ActionEvent evt){
                         
         try{
             dao.inserir(p);
-            limparActionPerformed(evt);
-            JOptionPane.showMessageDialog(null,"Cadastro realizado!"); 
+            
+            JOptionPane.showMessageDialog(null,"Cadastro do Endereço realizado!"); 
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(null,"Falha no Cadastro. Tente novamente!"); 

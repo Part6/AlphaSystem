@@ -30,7 +30,7 @@ public class vendadao {
             stmt.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Erro ao inserir venda: " + e.getMessage());
         } 
    }
     
@@ -48,7 +48,7 @@ public class vendadao {
               return rs.getInt("IdVenda");
           
           } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Erro ao procurar vendaid: " + e.getMessage());
             return -1;
         } 
 }
@@ -79,7 +79,7 @@ public class vendadao {
         }
 
     } catch (Exception e) {
-        e.printStackTrace();
+        System.out.println("Erro ao fazer lista: " + e.getMessage());
     }
 
     return lista;

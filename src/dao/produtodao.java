@@ -10,23 +10,29 @@ import java.util.List;
 import persistencia.Produto;
 
 public class produtodao {
-   public void inserir(Produto p) {
+   public int inserir(Produto p) {
         String sql = "Insert into Produtos(Nome,Categoria,Observacoes,Quantidade,Preco) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = coneccao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, p.getNome());
             stmt.setString(2, p.getCategoria());
             stmt.setString(3, p.getObservacoes());
             stmt.setInt(4, p.getQuantidade());
-            stmt.setDouble(5, p.getPreco());
+            stmt.setFloat(5, p.getPreco());
 
             stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+            return rs.getInt(1); 
+            }
 
         } catch (Exception e) {
-            e.printStackTrace();
+           System.out.println("Erro ao inserir: " + e.getMessage());
+           e.printStackTrace();
         } 
+        return -1;
    }
    
    public void updateQuantidade(int id) {
@@ -41,7 +47,7 @@ public class produtodao {
             stmt.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace();
+           System.out.println("Erro ao atualizar: " + e.getMessage());
         } 
        
        
@@ -108,7 +114,7 @@ public class produtodao {
         }
 
     } catch (Exception e) {
-        e.printStackTrace();
+        System.out.println("Erro na lista: " + e.getMessage());
     }
 
     return lista;
@@ -129,7 +135,7 @@ public class produtodao {
               return rs.getInt("Id");
           
           } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Erro ao procurar: " + e.getMessage());
             return -1;
         } 
 }
@@ -142,12 +148,14 @@ public class produtodao {
               stmt.setString(1, nome);
 
               ResultSet rs = stmt.executeQuery();
-               
+              
+              if(rs.next())
               return rs.getInt("Id");
           
           } catch (Exception e) {
-            e.printStackTrace();
-            return -1;
+            System.out.println("Erro ao procurar id produto: " + e.getMessage());
+            
         } 
+           return -1;
   }
 }
