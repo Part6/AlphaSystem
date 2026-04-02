@@ -50,9 +50,9 @@ public class CadastroClientesTela extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         cidade = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        cep = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        ncasa = new javax.swing.JTextField();
+        ncasa = new javax.swing.JFormattedTextField();
+        cep = new javax.swing.JFormattedTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         salvarMenu = new javax.swing.JMenuItem();
@@ -95,7 +95,7 @@ public class CadastroClientesTela extends javax.swing.JFrame {
             }
         });
 
-        cpf.setNextFocusableComponent(cep);
+        cpf.setNextFocusableComponent(ncasa);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setText("CPF:");
@@ -123,12 +123,22 @@ public class CadastroClientesTela extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel9.setText("Estado:");
 
-        cep.setNextFocusableComponent(rua);
-
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel10.setText("Número da casa:");
 
-        ncasa.setNextFocusableComponent(nome);
+        ncasa.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        ncasa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ncasaActionPerformed(evt);
+            }
+        });
+
+        cep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        cep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cepActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -187,21 +197,21 @@ public class CadastroClientesTela extends javax.swing.JFrame {
                                     .addComponent(cpf, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addGap(18, 18, 18)
                                 .addComponent(limpar)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel9)
-                            .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(estado, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                             .addComponent(jLabel8)
                             .addComponent(jLabel7)
-                            .addComponent(cidade, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rua, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cidade, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                            .addComponent(rua, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                             .addComponent(salvar)
                             .addComponent(jLabel10)
-                            .addComponent(ncasa, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(ncasa)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(224, 224, 224)
                         .addComponent(jLabel1)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +220,7 @@ public class CadastroClientesTela extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -223,10 +233,8 @@ public class CadastroClientesTela extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -234,14 +242,16 @@ public class CadastroClientesTela extends javax.swing.JFrame {
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ncasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel10)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ncasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(limpar)
@@ -261,7 +271,7 @@ public class CadastroClientesTela extends javax.swing.JFrame {
       nome.setText("");
       email.setText("");
       cpf.setText("");
-      cep.setText("");
+      ncasa.setText("");
       rua.setText("");
       cidade.setText("");
       estado.setText("");
@@ -269,7 +279,8 @@ public class CadastroClientesTela extends javax.swing.JFrame {
     }//GEN-LAST:event_limparActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-       
+        if(CheckErros())
+            return;
         cadastroEndereco(evt);
         cadastroCliente(evt);
     }//GEN-LAST:event_salvarActionPerformed
@@ -289,6 +300,14 @@ public class CadastroClientesTela extends javax.swing.JFrame {
     private void limparMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparMenuActionPerformed
        limparActionPerformed(evt);
     }//GEN-LAST:event_limparMenuActionPerformed
+
+    private void ncasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ncasaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ncasaActionPerformed
+
+    private void cepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cepActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cepActionPerformed
 
     /**
      * @param args the command line arguments
@@ -326,7 +345,7 @@ public class CadastroClientesTela extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField cep;
+    private javax.swing.JFormattedTextField cep;
     private javax.swing.JTextField cidade;
     private javax.swing.JTextField cpf;
     private javax.swing.JTextField email;
@@ -344,7 +363,7 @@ public class CadastroClientesTela extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JButton limpar;
     private javax.swing.JMenuItem limparMenu;
-    private javax.swing.JTextField ncasa;
+    private javax.swing.JFormattedTextField ncasa;
     private javax.swing.JTextField nome;
     private javax.swing.JTextField rua;
     private javax.swing.JButton sair;
@@ -359,7 +378,7 @@ private void cadastroCliente(java.awt.event.ActionEvent evt){
         p.setCpf(cpf.getText());
         p.setEmail(email.getText());
         p.setEnderecoId(dao.searchId(rua.getText(), cidade.getText(), estado.getText(),
-                Integer.parseInt(ncasa.getText()), Integer.parseInt(cep.getText())));
+                Integer.parseInt(ncasa.getText()), Integer.parseInt(ncasa.getText())));
         
                         
         
@@ -381,7 +400,7 @@ private void cadastroEndereco(java.awt.event.ActionEvent evt){
         p.setCidade(cidade.getText());
         p.setEstado(estado.getText());
         p.setNumero(Integer.parseInt(ncasa.getText()));
-        p.setCep(Integer.parseInt(cep.getText()));
+        p.setCep(Integer.parseInt(ncasa.getText()));
                         
         try{
             dao.inserir(p);
@@ -391,6 +410,34 @@ private void cadastroEndereco(java.awt.event.ActionEvent evt){
         catch (Exception e){
             JOptionPane.showMessageDialog(null,"Falha no Cadastro. Tente novamente!"); 
         }
+}
+
+private Boolean CheckErros(){
+    if(nome.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Nome não pode estar vazio!");return true;} 
+    
+    if(email.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Email não pode estar vazio!");return true;} 
+    
+    if(cpf.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo CPF não pode estar vazio!");return true;} 
+    
+    if(ncasa.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo CEP não pode estar vazio!");return true;} 
+    
+    if(rua.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Rua não pode estar vazio!");return true;} 
+    
+    if(cidade.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Cidade não pode estar vazio!");return true;} 
+    
+    if(estado.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Estado não pode estar vazio!");return true;} 
+    
+    if(ncasa.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Número da Casa não pode estar vazio!");return true;} 
+    
+    return false;
 }
 
 

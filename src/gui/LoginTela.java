@@ -140,7 +140,7 @@ public class LoginTela extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-
+        if(CheckErros())return;
                               Usuario usuario = new Usuario();
 
                               usuario.setLogin(login.getText());
@@ -226,4 +226,20 @@ public class LoginTela extends javax.swing.JFrame {
     private javax.swing.JTextField login;
     private javax.swing.JTextField senha;
     // End of variables declaration//GEN-END:variables
+
+private Boolean CheckErros(){
+    if(login.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Login não pode estar vazio!");return true;} 
+    
+    if(senha.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Senha não pode estar vazio!");return true;} 
+    
+   
+    
+    return false;
+ 
+}
+
+
+
 }

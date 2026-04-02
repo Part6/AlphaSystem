@@ -11,7 +11,6 @@ import persistencia.Produto;
 import dao.produtodao;
 import java.util.List;
 import persistencia.Fornecedor;
-import persistencia.FornecedorProduto;
 /**
  *
  * @author Desktop
@@ -36,8 +35,6 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
-        preco = new javax.swing.JTextField();
-        qnt = new javax.swing.JTextField();
         limpar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         salvar = new javax.swing.JButton();
@@ -51,8 +48,10 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         descricao = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        taxa = new javax.swing.JTextField();
         combobox = new javax.swing.JComboBox<>();
+        qnt = new javax.swing.JFormattedTextField();
+        preco = new javax.swing.JFormattedTextField();
+        taxa = new javax.swing.JFormattedTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         salvarMenu = new javax.swing.JMenuItem();
@@ -63,10 +62,6 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel4.setText("Quantidade:");
-
-        preco.setNextFocusableComponent(descricao);
-
-        qnt.setNextFocusableComponent(preco);
 
         limpar.setText("Limpar");
         limpar.addActionListener(new java.awt.event.ActionListener() {
@@ -114,13 +109,13 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel7.setText("Taxa:");
 
-        taxa.setNextFocusableComponent(nome);
-
         combobox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboboxActionPerformed(evt);
             }
         });
+
+        qnt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
 
         jMenu1.setText("File");
 
@@ -164,30 +159,36 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(52, 52, 52))
             .addGroup(layout.createSequentialGroup()
-                .addGap(93, 93, 93)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel7)
-                        .addComponent(taxa, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel8)
-                        .addComponent(jLabel6)
-                        .addComponent(descricao, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel4)
-                        .addComponent(preco, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                        .addComponent(qnt, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(limpar)
-                            .addGap(30, 30, 30)
-                            .addComponent(salvar))
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel2)
-                        .addComponent(categoria, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                        .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                        .addComponent(combobox, 0, 258, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(qnt, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(taxa, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addGap(223, 223, 223))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel6)
+                                    .addComponent(descricao, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(limpar)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(salvar))
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2)
+                                    .addComponent(categoria, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                                    .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                                    .addComponent(combobox, 0, 258, Short.MAX_VALUE))
+                                .addComponent(preco, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -211,7 +212,7 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(preco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(descricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,9 +246,12 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
        preco.setText("");
        qnt.setText("");
        taxa.setText("");
+       combobox.setSelectedIndex(0);
     }//GEN-LAST:event_limparActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
+       if(CheckErros())return;
+       
        Produto p = new Produto();
         p.setNome(nome.getText());  
                         p.setNome(nome.getText());
@@ -346,13 +350,13 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
     private javax.swing.JButton limpar;
     private javax.swing.JMenuItem limparMenu;
     private javax.swing.JTextField nome;
-    private javax.swing.JTextField preco;
-    private javax.swing.JTextField qnt;
+    private javax.swing.JFormattedTextField preco;
+    private javax.swing.JFormattedTextField qnt;
     private javax.swing.JButton sair;
     private javax.swing.JMenuItem sairMenu;
     private javax.swing.JButton salvar;
     private javax.swing.JMenuItem salvarMenu;
-    private javax.swing.JTextField taxa;
+    private javax.swing.JFormattedTextField taxa;
     // End of variables declaration//GEN-END:variables
 
 private void preencheComboBox(){
@@ -363,5 +367,29 @@ private void preencheComboBox(){
           combobox.addItem(f);
       }
     }    
+
+private Boolean CheckErros(){
+    if(nome.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Nome não pode estar vazio!");return true;} 
+    
+    if(categoria.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Categoria não pode estar vazio!");return true;} 
+    
+    if(qnt.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Quantidade não pode estar vazio!");return true;} 
+    
+    if(preco.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Preço não pode estar vazio!");return true;} 
+    
+    if(descricao.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Descrição não pode estar vazio!");return true;} 
+    
+    if(taxa.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Taxa não pode estar vazio!");return true;} 
+     
+    
+    return false;
+    
+}
 
 }

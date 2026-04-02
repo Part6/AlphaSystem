@@ -58,4 +58,41 @@ public Cliente search(String nome) {
 
     return null;
 }
+
+
+    public ArrayList<Object[]> getAllEEndereco() {
+    ArrayList<Object[]> lista = new ArrayList<>();
+
+    String sql = """
+        SELECT c.Id, c.Nome, c.Cpf, c.Email, en.Rua AS Rua, en.Cidade AS Cidade,
+        en.Estado AS Estado, en.Numero AS Numero, en.CEP AS CEP
+        FROM Cliente c
+        LEFT JOIN Endereco en ON c.EnderecoID = en.Id   
+    """;// GROUP BY p.Id
+
+    try (Connection conn = coneccao.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+
+        while (rs.next()) {
+            lista.add(new Object[]{
+                rs.getInt("Id"),
+                rs.getString("Nome"),
+                rs.getString("Cpf"),
+                rs.getString("Email"),
+                rs.getString("Rua"),
+                rs.getString("Cidade"),
+                rs.getString("Estado"),
+                rs.getInt("Numero"),
+                rs.getInt("CEP")
+                    
+            });
+        }
+
+    } catch (Exception e) {
+        System.out.println("Erro na lista: " + e.getMessage());
+    }
+
+    return lista;
+}
 }
