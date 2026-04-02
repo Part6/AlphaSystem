@@ -29,15 +29,31 @@ public class produtodao {
         } 
    }
    
+   public void updateQuantidade(int id) {
+       
+           
+        String sql = "Update Produtos Set Quantidade = Quantidade - 1 where Quantidade > 0 and Id = ?";
+
+        try (Connection conn = coneccao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+       
+       
+   }
+   
   public ArrayList<Produto> getAll(){
              String sql = "SELECT * FROM Produtos";  
-             //LIKE nos permite pesquisar por partes de um nome, ao invés de pesquisarmos por todo nome
+            
              
               try(Connection conn = coneccao.conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-                    //Conforme for a palavra ou letra digitada para pesquisa, será buscada antes, no meio e no fim
-                    
                     ResultSet rs = stmt.executeQuery();   
                     
                     ArrayList<Produto> listaEmpresas = new ArrayList<>();

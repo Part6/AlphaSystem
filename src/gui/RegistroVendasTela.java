@@ -10,10 +10,13 @@ package gui;
  */
 import dao.vendadao;
 import dao.clientedao;
+import dao.ProdutoHasVendaDao;
+import dao.produtodao;
 import persistencia.Venda;
 import persistencia.Cliente;
+import persistencia.ProdutoHasVenda;
+import persistencia.Produto;
 import javax.swing.JOptionPane;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -22,8 +25,12 @@ public class RegistroVendasTela extends javax.swing.JFrame {
     /**
      * Creates new form RegistroVendasTela
      */
-    public RegistroVendasTela() {
+    static int produtoId;
+    static ConsultaProdutos pp;
+    public RegistroVendasTela(ConsultaProdutos p,int idC) {
         initComponents();
+        produtoId = idC;
+        pp = p;
     }
 
     /**
@@ -40,8 +47,6 @@ public class RegistroVendasTela extends javax.swing.JFrame {
         limpar = new javax.swing.JButton();
         salvar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        saldo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         sair = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -72,11 +77,6 @@ public class RegistroVendasTela extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel1.setText("REGISTRO DE VENDAS");
-
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel2.setText("Saldo:");
-
-        saldo.setText("...");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel3.setText("Observações:");
@@ -114,8 +114,6 @@ public class RegistroVendasTela extends javax.swing.JFrame {
                         .addGap(34, 34, 34)
                         .addComponent(salvar))
                     .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(saldo)
                     .addComponent(clienteNome)
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -129,11 +127,7 @@ public class RegistroVendasTela extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addGap(31, 31, 31)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(saldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(clienteNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -141,7 +135,7 @@ public class RegistroVendasTela extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(9, 9, 9)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -161,7 +155,7 @@ public class RegistroVendasTela extends javax.swing.JFrame {
     }//GEN-LAST:event_sairActionPerformed
 
     private void limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparActionPerformed
-       saldo.setText("...");
+      
        clienteNome.setText("...");
        observacoes.setText("...");
     }//GEN-LAST:event_limparActionPerformed
@@ -178,9 +172,15 @@ public class RegistroVendasTela extends javax.swing.JFrame {
         
         p.setObservacoes(observacoes.getText());
         
-        vendadao produtodao = new vendadao();
+        vendadao v = new vendadao();
         try{
-            produtodao.inserir(p);
+            v.inserir(p);
+            
+            ProdutoHasVenda pHv = new ProdutoHasVenda();
+            new ProdutoHasVendaDao().inserir(v.searchId(p),produtoId );
+            new produtodao().updateQuantidade(produtoId);
+            pp.listarProdutos();
+            
             limparActionPerformed(evt);
             JOptionPane.showMessageDialog(null,"Cadastro realizado!"); 
         }
@@ -219,7 +219,7 @@ public class RegistroVendasTela extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegistroVendasTela().setVisible(true);
+                new RegistroVendasTela(pp, produtoId).setVisible(true);
             }
         });
     }
@@ -228,7 +228,6 @@ public class RegistroVendasTela extends javax.swing.JFrame {
     private javax.swing.JTextField clienteNome;
     private javax.swing.JTextField data;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -236,7 +235,6 @@ public class RegistroVendasTela extends javax.swing.JFrame {
     private javax.swing.JButton limpar;
     private javax.swing.JTextArea observacoes;
     private javax.swing.JButton sair;
-    private javax.swing.JTextField saldo;
     private javax.swing.JButton salvar;
     // End of variables declaration//GEN-END:variables
 }

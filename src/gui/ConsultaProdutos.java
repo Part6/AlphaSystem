@@ -34,7 +34,7 @@ public class ConsultaProdutos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
-        salvar = new javax.swing.JButton();
+        registroVenda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -59,10 +59,10 @@ public class ConsultaProdutos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(table);
 
-        salvar.setText("Registar venda");
-        salvar.addActionListener(new java.awt.event.ActionListener() {
+        registroVenda.setText("Registar venda");
+        registroVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salvarActionPerformed(evt);
+                registroVendaActionPerformed(evt);
             }
         });
 
@@ -82,7 +82,7 @@ public class ConsultaProdutos extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(registroVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -93,16 +93,19 @@ public class ConsultaProdutos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(salvar)
+                .addComponent(registroVenda)
                 .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-        new RegistroVendasTela().setVisible(true);
-    }//GEN-LAST:event_salvarActionPerformed
+    private void registroVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroVendaActionPerformed
+       if(table.getSelectedRow() >= 0){
+        int id = (int)table.getValueAt(table.getSelectedRow(), 0);
+        new RegistroVendasTela(this,id).setVisible(true);
+       }
+    }//GEN-LAST:event_registroVendaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,6 +138,7 @@ public class ConsultaProdutos extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ConsultaProdutos().setVisible(true);
+                
             }
         });
     }
@@ -142,11 +146,11 @@ public class ConsultaProdutos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton salvar;
+    private javax.swing.JButton registroVenda;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 
-private void listarProdutos(){
+public void listarProdutos(){
         try {
             produtodao produtosdao = new produtodao();
             

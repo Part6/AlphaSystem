@@ -31,26 +31,30 @@ public void inserir(Cliente cliente) {
         } 
    }
 
-public Cliente search(String nome){
-    String sql = "Select from Cliente where Nome = ? ";
-          try (Connection conn = coneccao.conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-              
-              stmt.setString(1, nome);
-              ResultSet rs = stmt.executeQuery();
-              
-              Cliente c = new Cliente();
-              c.setId(rs.getInt("Id"));
-              c.setNome(rs.getString("Nome"));
-              c.setCpf(rs.getString("CPF"));
-              c.setEmail(rs.getString("Email"));
-              
-              c.setEnderecoId(rs.getInt("EnderecoID"));
-              return c;
-          
-          } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        } 
+public Cliente search(String nome) {
+    String sql = "SELECT * FROM Cliente WHERE Nome = ?";
+
+    try (Connection conn = coneccao.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setString(1, nome);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) { // 🔥 ESSENCIAL
+            Cliente c = new Cliente();
+            c.setId(rs.getInt("Id"));
+            c.setNome(rs.getString("Nome"));
+            c.setCpf(rs.getString("CPF"));
+            c.setEmail(rs.getString("Email"));
+
+            c.setEnderecoId(rs.getInt("EnderecoID"));
+            return c;
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return null;
 }
 }
