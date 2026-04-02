@@ -40,6 +40,7 @@ public class TelaMain extends javax.swing.JFrame {
         consultaproduto = new javax.swing.JButton();
         consultavenda = new javax.swing.JButton();
         RegistoVenda = new javax.swing.JButton();
+        consultavenda1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         sairMenu = new javax.swing.JMenuItem();
@@ -104,6 +105,14 @@ public class TelaMain extends javax.swing.JFrame {
             }
         });
 
+        consultavenda1.setText("CONSULTAR CLIENTES");
+        consultavenda1.setNextFocusableComponent(clientecadastro);
+        consultavenda1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultavenda1ActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,9 +147,10 @@ public class TelaMain extends javax.swing.JFrame {
                                 .addComponent(clientecadastro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cadastroproduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(consultaproduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(consultavenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(RegistoVenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(RegistoVenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(consultavenda1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(consultaproduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(77, 77, 77))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -160,10 +170,12 @@ public class TelaMain extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(RegistoVenda)
                 .addGap(18, 18, 18)
+                .addComponent(consultavenda1)
+                .addGap(18, 18, 18)
                 .addComponent(consultaproduto)
                 .addGap(18, 18, 18)
                 .addComponent(consultavenda)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(sair)
                 .addContainerGap())
         );
@@ -229,6 +241,12 @@ public class TelaMain extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_sairMenuActionPerformed
 
+    private void consultavenda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultavenda1ActionPerformed
+       if(!tipo.equalsIgnoreCase("Financeiro")){
+           new ConsultaClientes().setVisible(true);
+       }
+    }//GEN-LAST:event_consultavenda1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -271,6 +289,7 @@ public class TelaMain extends javax.swing.JFrame {
     private javax.swing.JButton clientecadastro;
     private javax.swing.JButton consultaproduto;
     private javax.swing.JButton consultavenda;
+    private javax.swing.JButton consultavenda1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
