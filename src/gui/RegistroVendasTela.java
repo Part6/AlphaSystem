@@ -50,13 +50,23 @@ public class RegistroVendasTela extends javax.swing.JFrame {
         data = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         produto = new javax.swing.JTextField();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        salvarMenu = new javax.swing.JMenuItem();
+        limparMenu = new javax.swing.JMenuItem();
+        sairMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel4.setText("Cliente:");
 
-        clienteNome.setText("...");
+        clienteNome.setNextFocusableComponent(data);
+        clienteNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clienteNomeActionPerformed(evt);
+            }
+        });
 
         limpar.setText("Limpar");
         limpar.addActionListener(new java.awt.event.ActionListener() {
@@ -87,18 +97,51 @@ public class RegistroVendasTela extends javax.swing.JFrame {
 
         observacoes.setColumns(20);
         observacoes.setRows(5);
-        observacoes.setText("...");
+        observacoes.setNextFocusableComponent(clienteNome);
         jScrollPane1.setViewportView(observacoes);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setText("Data:");
 
-        data.setText("...");
+        data.setNextFocusableComponent(produto);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel6.setText("Produto:");
 
-        produto.setText("...");
+        produto.setNextFocusableComponent(observacoes);
+
+        jMenu1.setText("File");
+
+        salvarMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        salvarMenu.setText("Entrar");
+        salvarMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salvarMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(salvarMenu);
+
+        limparMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        limparMenu.setText("Limpar");
+        limparMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limparMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(limparMenu);
+
+        sairMenu.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        sairMenu.setText("Sair");
+        sairMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sairMenuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(sairMenu);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,7 +186,7 @@ public class RegistroVendasTela extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(9, 9, 9)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -164,8 +207,9 @@ public class RegistroVendasTela extends javax.swing.JFrame {
 
     private void limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparActionPerformed
       
-       clienteNome.setText("...");
-       observacoes.setText("...");
+       clienteNome.setText("");
+       observacoes.setText("");
+       data.setText("");
     }//GEN-LAST:event_limparActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
@@ -184,10 +228,13 @@ public class RegistroVendasTela extends javax.swing.JFrame {
         try{
             v.inserir(p);
             produtodao pdao = new produtodao();
-            int produtoId = pdao.searchId(produto.getText());    
+            int produtoId = pdao.searchId(produto.getText());  
+            System.out.println(produtoId);
             
             new ProdutoHasVendaDao().inserir(v.searchId(p),produtoId );
             pdao.updateQuantidade(produtoId);
+            //new ProdutoHasVendaDao().inserir(v.searchId(p),Integer.parseInt(produto.getText()) );
+            //pdao.updateQuantidade(Integer.parseInt(produto.getText()));
             
             limparActionPerformed(evt);
             JOptionPane.showMessageDialog(null,"Cadastro realizado!"); 
@@ -196,6 +243,22 @@ public class RegistroVendasTela extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Falha no Cadastro. Tente novamente!"); 
         }
     }//GEN-LAST:event_salvarActionPerformed
+
+    private void salvarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarMenuActionPerformed
+        salvarActionPerformed(evt);
+    }//GEN-LAST:event_salvarMenuActionPerformed
+
+    private void sairMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairMenuActionPerformed
+       dispose();
+    }//GEN-LAST:event_sairMenuActionPerformed
+
+    private void limparMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparMenuActionPerformed
+        limparActionPerformed(evt);
+    }//GEN-LAST:event_limparMenuActionPerformed
+
+    private void clienteNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clienteNomeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,11 +303,16 @@ public class RegistroVendasTela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limpar;
+    private javax.swing.JMenuItem limparMenu;
     private javax.swing.JTextArea observacoes;
     private javax.swing.JTextField produto;
     private javax.swing.JButton sair;
+    private javax.swing.JMenuItem sairMenu;
     private javax.swing.JButton salvar;
+    private javax.swing.JMenuItem salvarMenu;
     // End of variables declaration//GEN-END:variables
 }

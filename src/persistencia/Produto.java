@@ -14,7 +14,7 @@ public class Produto {
     private String categoria;
     private String observacoes;
     private int quantidade;
-    private double preco;
+    private float preco;
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
@@ -31,6 +31,6 @@ public class Produto {
     public int getQuantidade() { return quantidade; }
     public void setQuantidade(int quantidade) { this.quantidade = quantidade; }
 
-    public double getPreco() { return preco; }
-    public void setPreco(double preco) { this.preco = preco; }
+    public float getPreco() { return preco; }
+    public void setPreco(float preco) { this.preco = preco; }
 }
