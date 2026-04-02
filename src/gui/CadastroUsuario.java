@@ -4,20 +4,20 @@
  */
 package gui;
 
+import dao.usuariodao;
 import javax.swing.JOptionPane;
-import persistencia.Fornecedor;
-import dao.fornecedordao;
+import persistencia.Usuario;
 
 /**
  *
  * @author Desktop
  */
-public class CadastroFornecedoresTela extends javax.swing.JFrame {
+public class CadastroUsuario extends javax.swing.JFrame {
 
     /**
-     * Creates new form CadastroFornecedoresTela
+     * Creates new form CadastroUsuario
      */
-    public CadastroFornecedoresTela() {
+    public CadastroUsuario() {
         initComponents();
     }
 
@@ -36,8 +36,12 @@ public class CadastroFornecedoresTela extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         nome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        localizacao = new javax.swing.JTextField();
+        login = new javax.swing.JTextField();
         sair = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        senha = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        cargo = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         salvarMenu = new javax.swing.JMenuItem();
@@ -61,17 +65,13 @@ public class CadastroFornecedoresTela extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel1.setText("CADASTRO DE FORNECEDORES");
+        jLabel1.setText("CADASTRO DE USUÁRIOS");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setText("Nome:");
 
-        nome.setNextFocusableComponent(localizacao);
-
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel3.setText("Localização:");
-
-        localizacao.setNextFocusableComponent(nome);
+        jLabel3.setText("Login:");
 
         sair.setText("Sair");
         sair.addActionListener(new java.awt.event.ActionListener() {
@@ -79,6 +79,14 @@ public class CadastroFornecedoresTela extends javax.swing.JFrame {
                 sairActionPerformed(evt);
             }
         });
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel4.setText("Senha:");
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel5.setText("Cargo:");
+
+        cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Atendente", "Financeiro", "Gerente" }));
 
         jMenu1.setText("File");
 
@@ -118,88 +126,104 @@ public class CadastroFornecedoresTela extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(sair)
                                 .addGap(36, 36, 36)
                                 .addComponent(limpar)
                                 .addGap(29, 29, 29)
                                 .addComponent(salvar))
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(localizacao)
-                            .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(109, 109, 109))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(41, 41, 41))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2)
+                                .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                                .addComponent(login)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel4)
+                                .addComponent(senha, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                                .addComponent(cargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel1)
-                .addGap(30, 30, 30)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(localizacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addComponent(login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(limpar)
                     .addComponent(salvar)
                     .addComponent(sair))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
-        dispose();
-    }//GEN-LAST:event_sairActionPerformed
-
-    private void limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparActionPerformed
-        nome.setText("");
-        localizacao.setText("");
-        
-    }//GEN-LAST:event_limparActionPerformed
-
-    private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-        if(CheckErros())return;
-        
-        Fornecedor p = new Fornecedor();
-        p.setNome(nome.getText());  
-        p.setLocal(localizacao.getText());
-        
-        fornecedordao fdao = new fornecedordao();
-        try{
-            fdao.inserir(p);
-            limparActionPerformed(evt);
-            JOptionPane.showMessageDialog(null,"Cadastro realizado!"); 
-        }
-        catch (Exception e){
-            JOptionPane.showMessageDialog(null,"Falha no Cadastro. Tente novamente!"); 
-        }
-    }//GEN-LAST:event_salvarActionPerformed
-
     private void salvarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarMenuActionPerformed
         salvarActionPerformed(evt);
     }//GEN-LAST:event_salvarMenuActionPerformed
 
-    private void sairMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairMenuActionPerformed
-       dispose();
-    }//GEN-LAST:event_sairMenuActionPerformed
-
     private void limparMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparMenuActionPerformed
         limparActionPerformed(evt);
     }//GEN-LAST:event_limparMenuActionPerformed
+
+    private void sairMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairMenuActionPerformed
+        dispose();
+    }//GEN-LAST:event_sairMenuActionPerformed
+
+    private void limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparActionPerformed
+        nome.setText("");
+        login.setText("");
+        senha.setText("");
+        cargo.setSelectedItem(0);
+    }//GEN-LAST:event_limparActionPerformed
+
+    private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
+        if(CheckErros())return;
+
+        Usuario u = new Usuario();
+        u.setNome(nome.getText());
+        u.setLogin(login.getText());
+        u.setSenha(senha.getText());
+        u.setTipo((String)cargo.getSelectedItem());
+
+        usuariodao udao = new usuariodao();
+        try{
+            udao.inserir(u);
+            limparActionPerformed(evt);
+            JOptionPane.showMessageDialog(null,"Cadastro realizado!");
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null,"Falha no Cadastro. Tente novamente!");
+        }
+    }//GEN-LAST:event_salvarActionPerformed
+
+    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
+        dispose();
+    }//GEN-LAST:event_sairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,49 +242,57 @@ public class CadastroFornecedoresTela extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroFornecedoresTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroFornecedoresTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroFornecedoresTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroFornecedoresTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadastroFornecedoresTela().setVisible(true);
+                new CadastroUsuario().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cargo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JButton limpar;
     private javax.swing.JMenuItem limparMenu;
-    private javax.swing.JTextField localizacao;
+    private javax.swing.JTextField login;
     private javax.swing.JTextField nome;
     private javax.swing.JButton sair;
     private javax.swing.JMenuItem sairMenu;
     private javax.swing.JButton salvar;
     private javax.swing.JMenuItem salvarMenu;
+    private javax.swing.JTextField senha;
     // End of variables declaration//GEN-END:variables
 private Boolean CheckErros(){
     if(nome.getText().trim().isEmpty())
     { JOptionPane.showMessageDialog(null,"Campo Nome não pode estar vazio!");return true;} 
     
-    if(localizacao.getText().trim().isEmpty())
-    { JOptionPane.showMessageDialog(null,"Campo Localização não pode estar vazio!");return true;} 
+    if(login.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Login não pode estar vazio!");return true;} 
     
+    if(senha.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Senha não pode estar vazio!");return true;} 
+     
     return false;
   
 }
+
 
 
 }

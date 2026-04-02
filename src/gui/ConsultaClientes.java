@@ -38,7 +38,7 @@ public class ConsultaClientes extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         sairMenu = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

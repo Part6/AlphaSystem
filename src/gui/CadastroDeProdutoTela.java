@@ -11,7 +11,6 @@ import persistencia.Produto;
 import dao.produtodao;
 import java.util.List;
 import persistencia.Fornecedor;
-import persistencia.FornecedorProduto;
 /**
  *
  * @author Desktop
@@ -247,6 +246,7 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
        preco.setText("");
        qnt.setText("");
        taxa.setText("");
+       combobox.setSelectedIndex(0);
     }//GEN-LAST:event_limparActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
