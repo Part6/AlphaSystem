@@ -172,6 +172,8 @@ public class CadastroFornecedoresTela extends javax.swing.JFrame {
     }//GEN-LAST:event_limparActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
+        if(CheckErros())return;
+        
         Fornecedor p = new Fornecedor();
         p.setNome(nome.getText());  
                         p.setNome(nome.getText());
@@ -250,4 +252,18 @@ public class CadastroFornecedoresTela extends javax.swing.JFrame {
     private javax.swing.JButton salvar;
     private javax.swing.JMenuItem salvarMenu;
     // End of variables declaration//GEN-END:variables
+private Boolean CheckErros(){
+    if(nome.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Nome não pode estar vazio!");return true;} 
+    
+    if(localizacao.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Localização não pode estar vazio!");return true;} 
+    
+    return false;
+    
+    
+    
+}
+
+
 }

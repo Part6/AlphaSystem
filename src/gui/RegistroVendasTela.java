@@ -18,6 +18,7 @@ import persistencia.Cliente;
 import javax.swing.JOptionPane;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class RegistroVendasTela extends javax.swing.JFrame {
 
@@ -47,9 +48,9 @@ public class RegistroVendasTela extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         observacoes = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
-        data = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         produto = new javax.swing.JTextField();
+        data = new javax.swing.JFormattedTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         salvarMenu = new javax.swing.JMenuItem();
@@ -103,12 +104,12 @@ public class RegistroVendasTela extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setText("Data:");
 
-        data.setNextFocusableComponent(produto);
-
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel6.setText("Produto:");
 
         produto.setNextFocusableComponent(observacoes);
+
+        data.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
 
         jMenu1.setText("File");
 
@@ -151,7 +152,7 @@ public class RegistroVendasTela extends javax.swing.JFrame {
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                     .addComponent(jLabel4)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,10 +163,10 @@ public class RegistroVendasTela extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(clienteNome)
                     .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(data))
                     .addComponent(produto))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
@@ -180,8 +181,8 @@ public class RegistroVendasTela extends javax.swing.JFrame {
                 .addComponent(clienteNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -213,6 +214,8 @@ public class RegistroVendasTela extends javax.swing.JFrame {
     }//GEN-LAST:event_limparActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
+        if(CheckErros())return;
+        
         Venda p = new Venda();
         Cliente c = new clientedao().search(clienteNome.getText());
         p.setCliente(c);
@@ -297,7 +300,7 @@ public class RegistroVendasTela extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField clienteNome;
-    private javax.swing.JTextField data;
+    private javax.swing.JFormattedTextField data;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -315,4 +318,20 @@ public class RegistroVendasTela extends javax.swing.JFrame {
     private javax.swing.JButton salvar;
     private javax.swing.JMenuItem salvarMenu;
     // End of variables declaration//GEN-END:variables
+private Boolean CheckErros(){
+    if(clienteNome.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Cliente não pode estar vazio!");return true;} 
+    
+    if(data.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Data não pode estar vazio!");return true;} 
+    
+    if(produto.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Produto não pode estar vazio!");return true;} 
+    
+    if(observacoes.getText().trim().isEmpty())
+    { JOptionPane.showMessageDialog(null,"Campo Observações não pode estar vazio!");return true;} 
+    
+    
+    return false;
+}
 }
