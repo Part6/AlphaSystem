@@ -13,8 +13,10 @@ public class TelaMain extends javax.swing.JFrame {
     /**
      * Creates new form TelaMain
      */
-    public TelaMain() {
+    static String tipo;
+    public TelaMain(String tipo) {
         initComponents();
+        this.tipo = tipo;
     }
 
     /**
@@ -26,58 +28,66 @@ public class TelaMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        clientecadastro = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        sair = new javax.swing.JButton();
+        cadastrofornecedor = new javax.swing.JButton();
+        cadastroproduto = new javax.swing.JButton();
+        consultaproduto = new javax.swing.JButton();
+        consultavenda = new javax.swing.JButton();
+        RegistoVenda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButton1.setText("CADASTRAR CLIENTE");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        clientecadastro.setText("CADASTRAR CLIENTE");
+        clientecadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                clientecadastroActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel1.setText("BEM VINDO USUÁRIO");
 
-        jButton3.setText("Sair");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        sair.setText("Sair");
+        sair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                sairActionPerformed(evt);
             }
         });
 
-        jButton4.setText("CADASTRAR FORNECEDOR");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        cadastrofornecedor.setText("CADASTRAR FORNECEDOR");
+        cadastrofornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                cadastrofornecedorActionPerformed(evt);
             }
         });
 
-        jButton5.setText("CADASTRAR PRODUTO");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        cadastroproduto.setText("CADASTRAR PRODUTO");
+        cadastroproduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                cadastroprodutoActionPerformed(evt);
             }
         });
 
-        jButton6.setText("CONSULTAR PRODUTOS");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        consultaproduto.setText("CONSULTAR PRODUTOS");
+        consultaproduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                consultaprodutoActionPerformed(evt);
             }
         });
 
-        jButton7.setText("CONSULTAR VENDAS");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        consultavenda.setText("CONSULTAR VENDAS");
+        consultavenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                consultavendaActionPerformed(evt);
+            }
+        });
+
+        RegistoVenda.setText("REGISTRAR VENDA");
+        RegistoVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegistoVendaActionPerformed(evt);
             }
         });
 
@@ -89,18 +99,18 @@ public class TelaMain extends javax.swing.JFrame {
                 .addContainerGap(77, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cadastrofornecedor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(clientecadastro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cadastroproduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(consultaproduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(consultavenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RegistoVenda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(77, 77, 77))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(166, 166, 166))))
         );
         layout.setVerticalGroup(
@@ -109,46 +119,69 @@ public class TelaMain extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
                 .addGap(38, 38, 38)
-                .addComponent(jButton1)
+                .addComponent(clientecadastro)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5)
+                .addComponent(cadastroproduto)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(cadastrofornecedor)
                 .addGap(18, 18, 18)
-                .addComponent(jButton6)
+                .addComponent(RegistoVenda)
                 .addGap(18, 18, 18)
-                .addComponent(jButton7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(consultaproduto)
+                .addGap(18, 18, 18)
+                .addComponent(consultavenda)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addComponent(sair)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-      new ConsultaProdutos().setVisible(true);
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void consultaprodutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaprodutoActionPerformed
+ 
+     if(tipo.equalsIgnoreCase("Gerente")){
+         new ConsultaProdutos().setVisible(true);
+     }
+    }//GEN-LAST:event_consultaprodutoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new CadastroClientesTela().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void clientecadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientecadastroActionPerformed
+ 
+         if(!tipo.equalsIgnoreCase("Financeiro")){
+          new CadastroClientesTela().setVisible(true);
+      }
+    }//GEN-LAST:event_clientecadastroActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        new CadastroDeProdutoTela().setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void cadastroprodutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastroprodutoActionPerformed
+        
+         if(!tipo.equalsIgnoreCase("Financeiro")){
+            new CadastroDeProdutoTela().setVisible(true);
+      }
+    }//GEN-LAST:event_cadastroprodutoActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       new CadastroFornecedoresTela().setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void cadastrofornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrofornecedorActionPerformed
+      
+       if(!tipo.equalsIgnoreCase("Atendente")){
+            new CadastroFornecedoresTela().setVisible(true);
+       }
+    }//GEN-LAST:event_cadastrofornecedorActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sairActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_sairActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        new ConsultaVendas().setVisible(true);
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void consultavendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultavendaActionPerformed
+
+        if(!tipo.equalsIgnoreCase("Atendente")){
+            new ConsultaVendas().setVisible(true);
+        }
+    }//GEN-LAST:event_consultavendaActionPerformed
+
+    private void RegistoVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistoVendaActionPerformed
+       if(!tipo.equalsIgnoreCase("Financeiro")){
+           new RegistroVendasTela().setVisible(true);
+       }
+    }//GEN-LAST:event_RegistoVendaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,18 +213,19 @@ public class TelaMain extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaMain().setVisible(true);
+                new TelaMain(tipo).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton RegistoVenda;
+    private javax.swing.JButton cadastrofornecedor;
+    private javax.swing.JButton cadastroproduto;
+    private javax.swing.JButton clientecadastro;
+    private javax.swing.JButton consultaproduto;
+    private javax.swing.JButton consultavenda;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton sair;
     // End of variables declaration//GEN-END:variables
 }

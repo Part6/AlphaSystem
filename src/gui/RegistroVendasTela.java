@@ -14,8 +14,7 @@ import dao.ProdutoHasVendaDao;
 import dao.produtodao;
 import persistencia.Venda;
 import persistencia.Cliente;
-import persistencia.ProdutoHasVenda;
-import persistencia.Produto;
+
 import javax.swing.JOptionPane;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -25,12 +24,8 @@ public class RegistroVendasTela extends javax.swing.JFrame {
     /**
      * Creates new form RegistroVendasTela
      */
-    static int produtoId;
-    static ConsultaProdutos pp;
-    public RegistroVendasTela(ConsultaProdutos p,int idC) {
+    public RegistroVendasTela() {
         initComponents();
-        produtoId = idC;
-        pp = p;
     }
 
     /**
@@ -53,6 +48,8 @@ public class RegistroVendasTela extends javax.swing.JFrame {
         observacoes = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
         data = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        produto = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -98,6 +95,11 @@ public class RegistroVendasTela extends javax.swing.JFrame {
 
         data.setText("...");
 
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel6.setText("Produto:");
+
+        produto.setText("...");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,6 +107,7 @@ public class RegistroVendasTela extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4)
                     .addGroup(layout.createSequentialGroup()
@@ -119,7 +122,8 @@ public class RegistroVendasTela extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(produto))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -135,7 +139,11 @@ public class RegistroVendasTela extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(9, 9, 9)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -175,11 +183,11 @@ public class RegistroVendasTela extends javax.swing.JFrame {
         vendadao v = new vendadao();
         try{
             v.inserir(p);
+            produtodao pdao = new produtodao();
+            int produtoId = pdao.searchId(produto.getText());    
             
-            ProdutoHasVenda pHv = new ProdutoHasVenda();
             new ProdutoHasVendaDao().inserir(v.searchId(p),produtoId );
-            new produtodao().updateQuantidade(produtoId);
-            pp.listarProdutos();
+            pdao.updateQuantidade(produtoId);
             
             limparActionPerformed(evt);
             JOptionPane.showMessageDialog(null,"Cadastro realizado!"); 
@@ -219,7 +227,7 @@ public class RegistroVendasTela extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegistroVendasTela(pp, produtoId).setVisible(true);
+                new RegistroVendasTela().setVisible(true);
             }
         });
     }
@@ -231,9 +239,11 @@ public class RegistroVendasTela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton limpar;
     private javax.swing.JTextArea observacoes;
+    private javax.swing.JTextField produto;
     private javax.swing.JButton sair;
     private javax.swing.JButton salvar;
     // End of variables declaration//GEN-END:variables

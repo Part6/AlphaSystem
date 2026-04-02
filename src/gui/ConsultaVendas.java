@@ -44,7 +44,7 @@ public class ConsultaVendas extends javax.swing.JFrame {
         table = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,29 +137,14 @@ public class ConsultaVendas extends javax.swing.JFrame {
 
 
 public void listarProdutos(){
-       String sql = """
-        SELECT v.IdVenda, c.Nome AS ClienteNome, v.Observacoes, v.Data, p.Nome AS ProdutoNome
-        FROM Venda v
-        JOIN Cliente c ON v.IdCliente = c.Id
-        JOIN ProdutoHasVenda pv ON v.IdVenda = pv.IdVenda
-        JOIN Produtos p ON pv.IdProduto = p.Id
-    """;
-
-    DefaultTableModel model = (DefaultTableModel) table.getModel();
-    model.setRowCount(0);
-
-    try (Connection conn = coneccao.conectar();
-         PreparedStatement stmt = conn.prepareStatement(sql);
-         ResultSet rs = stmt.executeQuery()) {
-
-        while (rs.next()) {
-            model.addRow(new Object[]{
-                rs.getInt("IdVenda"),
-                rs.getString("ClienteNome"),   
-                rs.getString("Observacoes"),
-                rs.getDate("Data"),
-                rs.getString("ProdutoNome")   
-            });
+       
+    try {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setRowCount(0);
+        
+        ArrayList<Object[]> lista = new vendadao().getAllEProduto();
+        for (Object[] row : lista) {
+            model.addRow(row);
         }
 
     } catch (Exception e) {

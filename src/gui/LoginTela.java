@@ -4,6 +4,11 @@
  */
 package gui;
 
+import dao.Criptografia;
+import dao.usuariodao;
+import javax.swing.JOptionPane;
+import persistencia.Usuario;
+
 /**
  *
  * @author Desktop
@@ -107,8 +112,29 @@ public class LoginTela extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarActionPerformed
-        TelaMain tela = new TelaMain();
-        tela.setVisible(true);
+
+                              Usuario usuario = new Usuario();
+
+                              usuario.setLogin(login.getText());
+                              usuario.setSenha(Criptografia.getMD5(senha.getText()));        
+                              
+                              System.out.println("A senha em MD5 é: " + usuario.getSenha());
+                              
+                              usuario = usuariodao.validarUsuarioSeguro(usuario);    
+                              if (usuario != null) {
+                                  if( usuario.getTipo().equalsIgnoreCase("Gerente") ) {
+                                      JOptionPane.showMessageDialog(null, "Bem-vindo, Gerente " + usuario.getNome() + "");
+                                      new TelaMain(usuario.getTipo()).setVisible(true);
+                                  } else if ( usuario.getTipo().equalsIgnoreCase("Atendente") ||usuario.getTipo().equalsIgnoreCase("Financeiro") ) {
+                                      JOptionPane.showMessageDialog(null, "Olá, " + usuario.getNome());
+                                      new TelaMain(usuario.getTipo()).setVisible(true);
+                                  } else {
+                                      JOptionPane.showMessageDialog(null, "Ops, " + usuario.getNome() + "\nParece que você não tem permissão acessar o sistema :( ");
+                                  }
+                              } else {
+                                  JOptionPane.showMessageDialog(null, "Erro de autenticação! Verifique se os dados estão corretos.");
+                              }
+        
     }//GEN-LAST:event_entrarActionPerformed
 
     private void limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparActionPerformed

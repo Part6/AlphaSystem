@@ -76,4 +76,78 @@ public class produtodao {
                     return null;
                 }
         } 
+  
+  public ArrayList<Object[]> getAllEFornecedor() {
+    ArrayList<Object[]> lista = new ArrayList<>();
+
+    String sql = """
+        SELECT p.Id, p.Nome, p.Categoria, p.Observacoes, p.Quantidade, p.Preco,
+        f.Nome AS Fornecedores, fp.Taxa AS Taxa
+        FROM Produtos p
+        LEFT JOIN FornecedorProduto fp ON p.Id = fp.IdProduto
+        LEFT JOIN Fornecedor f ON fp.IdFornecedor = f.Id
+        
+    """;// GROUP BY p.Id
+
+    try (Connection conn = coneccao.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+
+        while (rs.next()) {
+            lista.add(new Object[]{
+                rs.getInt("Id"),
+                rs.getString("Nome"),
+                rs.getString("Categoria"),
+                rs.getString("Observacoes"),
+                rs.getInt("Quantidade"),
+                rs.getFloat("Preco"),
+                rs.getString("Fornecedores"),
+                rs.getFloat("Taxa")
+                    
+            });
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return lista;
+}
+  
+  public int searchId(String nome, String cate, String obs, int qnt, Double preco){
+    String sql = "Select Id from Produtos where Nome = ? and Categoria = ? and Observacoes = ? and Quantidade = ? and Preco = ? ";
+          try (Connection conn = coneccao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+              
+              stmt.setString(1, nome);
+              stmt.setString(2, cate);
+              stmt.setString(3, obs);
+              stmt.setInt(4, qnt);
+              stmt.setDouble(5, preco);
+              ResultSet rs = stmt.executeQuery();
+               
+              return rs.getInt("Id");
+          
+          } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        } 
+}
+  
+  public int searchId(String nome){
+    String sql = "Select Id from Produtos where Nome = ? ";
+          try (Connection conn = coneccao.conectar();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+              
+              stmt.setString(1, nome);
+
+              ResultSet rs = stmt.executeQuery();
+               
+              return rs.getInt("Id");
+          
+          } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        } 
+  }
 }

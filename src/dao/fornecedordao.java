@@ -4,8 +4,9 @@
  */
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import persistencia.Fornecedor;
 
 /**
@@ -28,4 +29,28 @@ public class fornecedordao {
             e.printStackTrace();
         } 
    }
+    
+    public List<Fornecedor> listar() {
+    List<Fornecedor> lista = new ArrayList<>();
+    String sql = "SELECT * FROM Fornecedor";
+
+    try (Connection conn = coneccao.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+
+        while (rs.next()) {
+            Fornecedor f = new Fornecedor();
+            f.setId(rs.getInt("Id"));
+            f.setNome(rs.getString("Nome"));
+            f.setLocal(rs.getString("Local"));
+
+            lista.add(f);
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return lista;
+}
 }

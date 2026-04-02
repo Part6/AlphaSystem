@@ -9,15 +9,15 @@ package persistencia;
  * @author Desktop
  */
 public class FornecedorProduto {
-    private Produto produto;
-    private Fornecedor fornecedor;
+    private int produto;
+    private int fornecedor;
     private float taxa;
 
-    public Produto getProduto() { return produto; }
-    public void setProduto(Produto produto) { this.produto = produto; }
+    public int getProduto() { return produto; }
+    public void setProduto(int produto) { this.produto = produto; }
 
-    public Fornecedor getFornecedor() { return fornecedor; }
-    public void setFornecedor(Fornecedor fornecedor) { this.fornecedor = fornecedor; }
+    public int getFornecedor() { return fornecedor; }
+    public void setFornecedor(int fornecedor) { this.fornecedor = fornecedor; }
 
     public float getTaxa() { return taxa; }
     public void setTaxa(float taxa) { this.taxa = taxa; }

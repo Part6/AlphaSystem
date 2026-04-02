@@ -34,7 +34,6 @@ public class ConsultaProdutos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
-        registroVenda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -46,11 +45,11 @@ public class ConsultaProdutos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome", "Categoria", "Descrição", "Quantidade", "Preço"
+                "ID", "Nome", "Categoria", "Descrição", "Quantidade", "Preço", "Fornecedor", "Taxa"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.String.class, java.lang.Float.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -58,13 +57,6 @@ public class ConsultaProdutos extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(table);
-
-        registroVenda.setText("Registar venda");
-        registroVenda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registroVendaActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,32 +72,19 @@ public class ConsultaProdutos extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(registroVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(registroVenda)
-                .addGap(20, 20, 20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void registroVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroVendaActionPerformed
-       if(table.getSelectedRow() >= 0){
-        int id = (int)table.getValueAt(table.getSelectedRow(), 0);
-        new RegistroVendasTela(this,id).setVisible(true);
-       }
-    }//GEN-LAST:event_registroVendaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,32 +125,25 @@ public class ConsultaProdutos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton registroVenda;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 
 public void listarProdutos(){
-        try {
-            produtodao produtosdao = new produtodao();
-            
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
-            model.setNumRows(0);
-            
-            ArrayList<Produto> listagem = produtosdao.getAll();
-            
-            for(int i = 0; i < listagem.size(); i++){
-                model.addRow(new Object[]{
-                    listagem.get(i).getId(),
-                    listagem.get(i).getNome(),
-                    listagem.get(i).getCategoria(),
-                    listagem.get(i).getObservacoes(),
-                    listagem.get(i).getQuantidade(),
-                    listagem.get(i).getPreco(),
-                });
-            }
-        } catch (Exception e) {
-        }
-    
-    }
+        
+     try {
+        produtodao dao = new produtodao();
 
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setNumRows(0);
+
+        ArrayList<Object[]> lista = dao.getAllEFornecedor();
+
+        for (Object[] row : lista) {
+            model.addRow(row);
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 }

@@ -25,6 +25,10 @@ public class Fornecedor {
     public String getLocal() { return local; }
     public void setLocal(String local) { this.local = local; }
 
+    @Override
+    public String toString() {
+    return nome; // é isso que aparece no ComboBox
+}
    // public List<FornecedorProduto> getProdutos() { return produtos; }
    // public void setProdutos(List<FornecedorProduto> produtos) { this.produtos = produtos; }
 }

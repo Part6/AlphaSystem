@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import persistencia.Venda;
 
 /**
@@ -50,5 +51,37 @@ public class vendadao {
             e.printStackTrace();
             return -1;
         } 
+}
+    
+     public ArrayList<Object[]> getAllEProduto() {
+    ArrayList<Object[]> lista = new ArrayList<>();
+
+    String sql = """
+        SELECT v.IdVenda, c.Nome AS ClienteNome, v.Observacoes, v.Data, p.Nome AS ProdutoNome
+        FROM Venda v
+        JOIN Cliente c ON v.IdCliente = c.Id
+        JOIN ProdutoHasVenda pv ON v.IdVenda = pv.IdVenda
+        JOIN Produtos p ON pv.IdProduto = p.Id
+    """;
+
+    try (Connection conn = coneccao.conectar();
+         PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+
+        while (rs.next()) {
+            lista.add(new Object[]{
+               rs.getInt("IdVenda"),
+                rs.getString("ClienteNome"),   
+                rs.getString("Observacoes"),
+                rs.getDate("Data"),
+                rs.getString("ProdutoNome")          
+            });
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return lista;
 }
 }

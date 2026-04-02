@@ -17,28 +17,27 @@ import persistencia.Usuario;
  */
 public class usuariodao {
      public static Usuario validarUsuarioSeguro(Usuario Usuario) {
-                              // Criando consulta parametrizada
+                             
                               String sql = "SELECT * FROM Usuario WHERE login = ? AND senha = ?";
                               Usuario UsuarioEncontrado = null;
-                              //resolver isso !!!!!!!!!!!!!!!!!
-                              try {
-                                  Connection conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/login_exemplo", "root", "Gustavobh10192008");
-                                  PreparedStatement statement = conexao.prepareStatement(sql);
+                             
+                              try (Connection conn = coneccao.conectar();
+                                PreparedStatement stmt = conn.prepareStatement(sql)) {
                                   
-                                  // Atribuindo os valores na consulta
-                                  statement.setString(1, Usuario.getLogin());
-                                  statement.setString(2, Usuario.getSenha());
-                                  ResultSet rs = statement.executeQuery();
+                                  
+                                  stmt.setString(1, Usuario.getLogin());
+                                  stmt.setString(2, Usuario.getSenha());
+                                  ResultSet rs = stmt.executeQuery();
                       
                                   while (rs.next()) {
                                       UsuarioEncontrado = new Usuario();
-                                      UsuarioEncontrado.setId(rs.getInt("id"));
-                                      UsuarioEncontrado.setNome(rs.getString("nome"));
-                                      UsuarioEncontrado.setLogin(rs.getString("login"));
-                                      UsuarioEncontrado.setSenha(rs.getString("senha"));
-                                      UsuarioEncontrado.setTipo(rs.getString("tipo"));
+                                      UsuarioEncontrado.setId(rs.getInt("Id"));
+                                      UsuarioEncontrado.setNome(rs.getString("Nome"));
+                                      UsuarioEncontrado.setLogin(rs.getString("Login"));
+                                      UsuarioEncontrado.setSenha(rs.getString("Senha"));
+                                      UsuarioEncontrado.setTipo(rs.getString("Tipo"));
                                   }
-                              } catch (SQLException ex) {
+                              } catch (Exception ex) {
                                   System.out.println("Sintaxe de comando invalida");
                               }
                               

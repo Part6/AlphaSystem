@@ -4,9 +4,14 @@
  */
 package gui;
 
+import dao.FornecedorProdutoDao;
+import dao.fornecedordao;
 import javax.swing.JOptionPane;
 import persistencia.Produto;
 import dao.produtodao;
+import java.util.List;
+import persistencia.Fornecedor;
+import persistencia.FornecedorProduto;
 /**
  *
  * @author Desktop
@@ -18,6 +23,7 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
      */
     public CadastroDeProdutoTela() {
         initComponents();
+        carregarFornecedores();
     }
 
     /**
@@ -45,6 +51,8 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         descricao = new javax.swing.JTextField();
         fornecedor = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        taxa = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -100,6 +108,11 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
 
         descricao.setText("...");
 
+        jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel7.setText("Taxa:");
+
+        taxa.setText("...");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,25 +123,29 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
                 .addGap(52, 52, 52))
             .addGroup(layout.createSequentialGroup()
                 .addGap(93, 93, 93)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel6)
-                    .addComponent(descricao, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(preco, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                    .addComponent(qnt, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(limpar)
-                        .addGap(30, 30, 30)
-                        .addComponent(salvar))
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(categoria, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                    .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                    .addComponent(fornecedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel7)
+                        .addComponent(taxa, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel6)
+                        .addComponent(descricao, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel4)
+                        .addComponent(preco, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                        .addComponent(qnt, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(sair, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(limpar)
+                            .addGap(30, 30, 30)
+                            .addComponent(salvar))
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel2)
+                        .addComponent(categoria, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                        .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                        .addComponent(fornecedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -160,7 +177,11 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(fornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(taxa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(limpar)
                     .addComponent(salvar)
@@ -195,6 +216,19 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
         produtodao produtodao = new produtodao();
         try{
             produtodao.inserir(p);
+            
+            
+            FornecedorProdutoDao fdao = new FornecedorProdutoDao();
+            
+            int idfornecedor = ((Fornecedor)fornecedor.getSelectedItem()).getId();
+            fdao.inserir(idfornecedor,produtodao.searchId(nome.getText(),
+                    categoria.getText(),
+                    descricao.getText(),
+                    Integer.parseInt(qnt.getText()),
+                    Double.parseDouble(preco.getText())),Float.parseFloat(taxa.getText()));
+            
+           
+            
             limparActionPerformed(evt);
             JOptionPane.showMessageDialog(null,"Cadastro realizado!"); 
         }
@@ -248,6 +282,7 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JButton limpar;
     private javax.swing.JTextField nome;
@@ -255,5 +290,18 @@ public class CadastroDeProdutoTela extends javax.swing.JFrame {
     private javax.swing.JTextField qnt;
     private javax.swing.JButton sair;
     private javax.swing.JButton salvar;
+    private javax.swing.JTextField taxa;
     // End of variables declaration//GEN-END:variables
+
+public void carregarFornecedores() {
+    fornecedordao dao = new fornecedordao();
+    List<Fornecedor> lista = dao.listar();
+
+    fornecedor.removeAllItems();
+
+    for (Fornecedor f : lista) {
+        fornecedor.addItem(f.toString());
+    }
+}
+
 }
